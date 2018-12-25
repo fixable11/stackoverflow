@@ -15,3 +15,12 @@ Route::get('/', function () {
     
     return view('welcome');
 });
+
+Route::get('home', function () {
+    
+    return view('front.home');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

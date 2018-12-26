@@ -10519,3 +10519,12 @@ a.text-dark:focus {
   color: #fff;
 }
 
+.questionsHeader {
+  display: flex;
+  align-items: center;
+}
+
+.questionsHeader__title {
+  margin-bottom: 0;
+}
+

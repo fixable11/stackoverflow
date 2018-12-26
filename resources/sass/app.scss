@@ -36,3 +36,11 @@
     background-color: $green;
     color: #fff;
 }
+
+.questionsHeader{
+    display: flex;
+    align-items: center;
+    &__title{
+        margin-bottom: 0;
+    }
+}

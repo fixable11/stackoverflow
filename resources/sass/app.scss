@@ -52,11 +52,24 @@
     &__title{
         margin-right: auto;
     }
-    &__edit{
+    &__btngroup{
+        display: flex;
         margin-left: auto;
+    }
+    &__edit{
         display: inline-block;   
+        margin-right: 10px;
+    }
+    &__destroy{
+        display: inline-block;
+        margin-right: 5px;
     }
     &__meta{
         margin-top: 10px;
     }
+}
+
+
+.o-h{
+    overflow: hidden;
 }

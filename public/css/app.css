@@ -10538,12 +10538,26 @@ a.text-dark:focus {
   margin-right: auto;
 }
 
-.q__edit {
+.q__btngroup {
+  display: flex;
   margin-left: auto;
+}
+
+.q__edit {
   display: inline-block;
+  margin-right: 10px;
+}
+
+.q__destroy {
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .q__meta {
   margin-top: 10px;
+}
+
+.o-h {
+  overflow: hidden;
 }
 

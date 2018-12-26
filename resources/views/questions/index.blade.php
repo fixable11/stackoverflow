@@ -21,10 +21,17 @@
 
                     @foreach ($questions as $question)
                             <div class="media">
-                                <div class="media-body">
+                                <div class="media-body o-h">
                                     <div class="q">
                                         <h3 class="mt-0 q__title"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
-                                        <a class="q__edit btn btn-outline-primary btn-sm" href="{{ route('questions.edit', $question->id) }}">Edit</a>
+                                        <div class="q__btngroup">
+                                            <a class="q__edit btn btn-outline-primary btn-sm" href="{{ route('questions.edit', $question->id) }}">Edit</a>
+                                            <form class="form-delete" method="POST" action="{{ route('questions.destroy', $question->id) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button onclick="return confirm('Are you sure?')" type="submit" class="q__destroy btn btn-outline-danger btn-sm">Delete</button>
+                                            </form>    
+                                        </div> 
                                     </div>
                                     <p class="lead q__meta">
                                         Asked by

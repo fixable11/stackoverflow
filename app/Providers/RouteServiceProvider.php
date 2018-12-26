@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Question;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,9 +24,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        Route::bind('slug', function ($value) {
+            return Question::where('slug', $value)->first() ?? abort(404);
+        });
     }
 
     /**

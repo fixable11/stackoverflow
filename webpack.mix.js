@@ -11,5 +11,13 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.browserSync({
+    proxy: 'my-domain.test'
+});
+
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+
+mix.browserSync({
+    proxy: 'larashop'
+});

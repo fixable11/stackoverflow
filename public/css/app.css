@@ -10504,7 +10504,7 @@ a.text-dark:focus {
   margin-right: 10px;
   border: 1px solid transparent;
   display: inline-block;
-  padding: 10px;
+  padding: 5px;
 }
 
 .answered {
@@ -10526,5 +10526,24 @@ a.text-dark:focus {
 
 .questionsHeader__title {
   margin-bottom: 0;
+}
+
+.q {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.q__title {
+  margin-right: auto;
+}
+
+.q__edit {
+  margin-left: auto;
+  display: inline-block;
+}
+
+.q__meta {
+  margin-top: 10px;
 }
 

@@ -22,7 +22,7 @@
     margin-right: 10px;
     border: 1px solid transparent;
     display: inline-block;
-    padding: 10px;
+    padding: 5px;
 }
 
 .answered{
@@ -42,5 +42,21 @@
     align-items: center;
     &__title{
         margin-bottom: 0;
+    }
+}
+
+.q{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__title{
+        margin-right: auto;
+    }
+    &__edit{
+        margin-left: auto;
+        display: inline-block;   
+    }
+    &__meta{
+        margin-top: 10px;
     }
 }

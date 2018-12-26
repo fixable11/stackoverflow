@@ -22,8 +22,11 @@
                     @foreach ($questions as $question)
                             <div class="media">
                                 <div class="media-body">
-                                    <h3 class="mt-0"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
-                                    <p class="lead">
+                                    <div class="q">
+                                        <h3 class="mt-0 q__title"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
+                                        <a class="q__edit btn btn-outline-primary btn-sm" href="{{ route('questions.edit', $question->id) }}">Edit</a>
+                                    </div>
+                                    <p class="lead q__meta">
                                         Asked by
                                         <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
                                         <small class="text-muted">{{ $question->created_date }}</small>

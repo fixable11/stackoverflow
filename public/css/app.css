@@ -10578,7 +10578,17 @@ a.text-dark:focus {
   margin-top: 20px;
 }
 
+.answer .answer-media {
+  align-items: stretch;
+}
+
+.answer .answer-media-body {
+  display: flex;
+  flex-direction: column;
+}
+
 .respondent {
+  margin-top: auto;
   display: flex;
   align-items: center;
 }

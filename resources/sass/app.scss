@@ -87,9 +87,17 @@
 
 .answer{
     margin-top: 20px;
+    .answer-media{
+        align-items: stretch;
+    }
+    .answer-media-body{
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .respondent{
+    margin-top: auto;
     display: flex;
     align-items: center;
     &__person{

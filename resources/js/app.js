@@ -31,3 +31,30 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
+
+$(document).ready(function () {
+    $('.check-mark ').on('click', function (event) {
+        event.preventDefault();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $ths = $(this);
+
+        $url = $ths.data('action');
+
+        $.ajax({
+            method: "POST",
+            url: $url,
+            data: {
+                
+            }
+        }).done(function (data) {
+            $('.check-mark').removeClass('vote-accepted');
+            $ths.addClass('vote-accepted');
+        });
+
+    });
+});

@@ -26,3 +26,5 @@ Route::get('/questions/{slug}', 'QuestionsController@show')->name('questions.sho
 Route::get('questions/{slug}/answers/{answer}/edit', 'AnswersController@edit');
 Route::delete('questions/{slug}/answers/{answer}', 'AnswersController@destroy');
 Route::resource('questions.answers', 'AnswersController')->except(['index', 'create', 'show']);
+
+Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers.accept');

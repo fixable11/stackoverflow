@@ -47964,13 +47964,15 @@ var app = new Vue({
   el: '#app'
 });
 $(document).ready(function () {
-  $('.check-mark ').on('click', function (event) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  /* Check mark */
+
+  $('.check-mark').on('click', function (event) {
     event.preventDefault();
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
     $ths = $(this);
     $url = $ths.data('action');
     $.ajax({
@@ -47980,6 +47982,25 @@ $(document).ready(function () {
     }).done(function (data) {
       $('.check-mark').removeClass('vote-accepted');
       $ths.addClass('vote-accepted');
+    });
+  });
+  /* Star */
+
+  $('.favorite').on('click', function (event) {
+    event.preventDefault();
+    $ths = $(this);
+    $url = $ths.data('action');
+    $method = $ths.data('method');
+    $.ajax({
+      method: $method,
+      url: $url,
+      data: {}
+    }).done(function (data) {
+      $('.favorites-count').text(data.favorites_count);
+      $ths.data('method') == "DELETE" ? $ths.data('method', 'POST') : $ths.data('method', 'DELETE');
+      $ths.toggleClass('favorited');
+    }).fail(function (data) {
+      if (data.status == 401) window.location = "/login";
     });
   });
 });

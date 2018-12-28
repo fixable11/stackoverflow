@@ -28,9 +28,12 @@
                             <a href="#" class="vote-down off">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
-                            <a href="#" class="favorite mt-2 favorited">
+                            <a href="#" 
+                            class="favorite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favorited ? 'favorited' : '') }}"
+                            data-action="{{ route('questions.favorite', $question->id) }}" 
+                            data-method="{{ $question->is_favorited ? 'DELETE' : 'POST' }}">
                                 <i class="fas fa-star fa-2x"></i>
-                                <span class="favorites-count">123</span>
+                                <span class="favorites-count">{{ $question->favorites_count }}</span>
                             </a>
                         </div>
 

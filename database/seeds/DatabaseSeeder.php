@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
         factory(App\User::class, 3)->create()->each(function ($user) {
             $user->questions()->saveMany(
                 factory(App\Question::class, rand(1, 5))->make()
-            )->each(function ($q){
+            )->each(function ($q) use ($user){
                 $q->answers()->saveMany(factory(App\Answer::class, rand(1, 5))->make());
+                $q->favorites()->attach($user);
             });
         });
 

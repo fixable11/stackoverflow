@@ -131,7 +131,7 @@
         font-size: 22px;
     }
     .favorites-count{
-        font-size: 12px;
+        font-size: 14px;
     }
 
     a{
@@ -144,6 +144,9 @@
 
         &.favorite{
             &.favorited, &.favorited:hover{
+                color: $warning;
+            }
+            &.favorited .favorites-count{
                 color: $warning;
             }
         }

@@ -48013,7 +48013,7 @@ $(document).ready(function () {
       url: $url,
       data: {}
     }).done(function (data) {
-      $('.votes-count').text(data.votes_count);
+      $ths.siblings('.votes-count').text(data.votes_count);
     }).fail(function (data) {
       if (data.status == 401) window.location = "/login";
     });

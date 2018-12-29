@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
 
+    use VotesTrait;
+
     protected $fillable = ['body', 'user_id'];
 
     public function question()

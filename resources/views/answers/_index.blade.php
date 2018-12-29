@@ -19,11 +19,16 @@
                     <div class="media answer-media">
 
                         <div class="vote-controls">
-                            <a href="#" class="vote-up">
+                            <a href="#" 
+                            class="vote-up {{ Auth::guest() ? 'off' : '' }}"
+                            data-action="{{ route('answers.vote', $answer->id) }}" 
+                            data-method="POST">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
-                            <span class="votes-count">1232</span>
-                            <a href="#" class="vote-down off">
+                            <span class="votes-count">{{ $answer->votes_count }}</span>
+                            <a href="#" class="vote-down {{ Auth::guest() ? 'off' : '' }}"
+                            data-action="{{ route('answers.unvote', $answer->id) }}"
+                            data-method="DELETE">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
                             @can('accept', $answer)

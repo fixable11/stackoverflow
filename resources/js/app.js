@@ -81,4 +81,25 @@ $(document).ready(function () {
         });
 
     });
+
+    $('.vote-up, .vote-down').on('click', function (event) {
+        event.preventDefault();
+ 
+        $ths = $(this);
+
+        $url = $ths.data('action');
+        $method = $ths.data('method');
+
+        $.ajax({
+            method: $method,
+            url: $url,
+            data: {}
+        }).done(function (data) {
+            $('.votes-count').text(data.votes_count);
+        
+        }).fail(function (data){
+            if(data.status == 401) window.location="/login";
+        });
+
+    });
 });

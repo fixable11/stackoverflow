@@ -51,7 +51,7 @@
                                         </div>
                                         
                                         <div class="vote counter">
-                                            <strong>{{ $question->votes }}</strong> {{ str_plural('vote', $question->votes) }}
+                                            <strong>{{ $question->votes_count }}</strong> {{ str_plural('vote', $question->votes_count) }}
                                         </div>
                                         
                                         <div class="views counter">

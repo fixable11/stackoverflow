@@ -45,10 +45,7 @@
                         <div class="media-body">
                             {!! $question->body_html !!}
                             <div class="respondent">                                
-                                @include('shared._author', [
-                                    'model' => $question, 
-                                    'text' => 'Asked'
-                                ])
+                                <author-info :model="{{ $question }}" label="asked"></author-info>
                             </div>
                         </div>
 

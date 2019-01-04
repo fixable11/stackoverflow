@@ -13,6 +13,8 @@ class Answer extends Model
 
     protected $with = ['question'];
 
+    protected $appends = ['created_date'];
+
     public function question()
     {
         return $this->belongsTo(Question::class);

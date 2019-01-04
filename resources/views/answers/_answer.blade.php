@@ -8,7 +8,8 @@
                 <div class="media-body answer-media-body">
                     {!! $answer->body_html !!}
                     <div class="respondent">
-                        @include('shared._author', ['model' => $answer, 'text' => 'Answered'])
+                        {{-- @include('shared._author', ['model' => $answer, 'text' => 'Answered']) --}}
+                        <author-info :model="{{ $answer }}" label="Answered"></author-info>
                         <div class="respondent__buttons">
                             @can('update', $answer)
                                 <a class="q__edit btn btn-outline-primary btn-sm" href="{{ route('questions.answers.edit', [$question->slug, $answer->id]) }}">Edit</a>

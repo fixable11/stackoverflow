@@ -1,4 +1,4 @@
-
+"use strict";
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('author-info', require('./components/AuthorInfo.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -44,9 +44,9 @@ $(document).ready(function () {
     $('.check-mark').on('click', function (event) {
         event.preventDefault();
  
-        $ths = $(this);
+        let $ths = $(this);
 
-        $url = $ths.data('action');
+        let $url = $ths.data('action');
 
         $.ajax({
             method: "POST",
@@ -63,10 +63,10 @@ $(document).ready(function () {
     $('.favorite').on('click', function (event) {
         event.preventDefault();
  
-        $ths = $(this);
+        let $ths = $(this);
 
-        $url = $ths.data('action');
-        $method = $ths.data('method');
+        let $url = $ths.data('action');
+        let $method = $ths.data('method');
 
         $.ajax({
             method: $method,
@@ -85,10 +85,10 @@ $(document).ready(function () {
     $('.vote-up, .vote-down').on('click', function (event) {
         event.preventDefault();
  
-        $ths = $(this);
+        let $ths = $(this);
 
-        $url = $ths.data('action');
-        $method = $ths.data('method');
+        let $url = $ths.data('action');
+        let $method = $ths.data('method');
 
         $.ajax({
             method: $method,

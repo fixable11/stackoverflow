@@ -45,17 +45,10 @@
                         <div class="media-body">
                             {!! $question->body_html !!}
                             <div class="respondent">                                
-                                <div class="media respondent__person">
-                                    <span class="text-muted">Asked {{ $question->created_date }}</span>
-                                    <div class="respondent__personBot">
-                                        <a class="gravatarWrap" href="{{ $question->user->url }}" class="pr-2">
-                                            <img class="gravatar" src="{{ $question->user->avatar }}" alt="">
-                                        </a>
-                                        <div class="media-body respondent__personName">
-                                            <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('shared._author', [
+                                    'model' => $question, 
+                                    'text' => 'Asked'
+                                ])
                             </div>
                         </div>
 

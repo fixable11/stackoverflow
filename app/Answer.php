@@ -11,6 +11,8 @@ class Answer extends Model
 
     protected $fillable = ['body', 'user_id'];
 
+    protected $with = ['question'];
+
     public function question()
     {
         return $this->belongsTo(Question::class);

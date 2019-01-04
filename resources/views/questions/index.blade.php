@@ -19,7 +19,7 @@
 
                     @include('layouts._messages')
 
-                    @foreach ($questions as $question)
+                    @forelse ($questions as $question)
                             <div class="media">
                                 <div class="media-body o-h">
                                     <div class="q">
@@ -63,7 +63,11 @@
                                 </div>
                             </div>
                         <hr>
-                    @endforeach
+                    @empty
+                        <div class="alert alert-warning">
+                            <p>There is nothing here</p>
+                        </div>
+                    @endforelse
 
                    <div class="mx-auto">
                        {{ $questions->links() }}

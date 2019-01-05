@@ -13,7 +13,7 @@ class Answer extends Model
 
     protected $with = ['question'];
 
-    protected $appends = ['created_date'];
+    protected $appends = ['created_date', 'body_html'];
 
     public function question()
     {

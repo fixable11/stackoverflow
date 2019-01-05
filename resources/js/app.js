@@ -7,7 +7,6 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,6 +20,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('author-info', require('./components/AuthorInfo.vue').default);
+Vue.component('answer', require('./components/Answer.vue').default);
+Vue.component('flash', require('./components/Flash.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

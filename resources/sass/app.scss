@@ -10,6 +10,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+
+[v-cloak] {display: none}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -165,4 +168,13 @@
 .respondent__buttons{
     margin-left: auto;
     display: flex;
+}
+
+.answer{
+    &__btn-group{
+        margin-top: 10px;    
+    }
+    &__btn{
+        margin-right: 5px;
+    }
 }

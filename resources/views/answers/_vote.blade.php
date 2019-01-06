@@ -12,7 +12,7 @@
         data-method="DELETE">
             <i class="fas fa-caret-down fa-3x"></i>
         </a>
-        @can('accept', $answer)
+        {{-- @can('accept', $answer)
             <a href="#" class="check-mark {{ $model->status }} mt-2" 
                 data-action="{{ route('answers.accept', $answer->id) }}">
                 <i class="fas fa-check fa-2x"></i>
@@ -23,6 +23,6 @@
                 <i class="fas fa-check fa-2x"></i>
             </a>
         @endif  
-        @endcan
+        @endcan --}}
         
 </div>

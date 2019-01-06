@@ -4,9 +4,11 @@
             <div class="card answer">
                 <div class="card-body">
                     <div class="media answer-media">
-        
-                        <!-- @include('answers._vote') -->
-        
+                        
+                        <div class="vote-controls">
+                            <best-answer-marker :answer="answer"></best-answer-marker>
+                        </div>
+
                         <div class="media-body answer-media-body">
                             <form v-if="editState" method="POST" @submit.prevent="update">
                                 <textarea required name="body" class="form-control" rows="5" v-model="body"></textarea>
@@ -23,7 +25,7 @@
                                         <div v-if="auth('updateAnswer', answer)">
                                             <a class="q__edit btn btn-outline-primary btn-sm" @click.prevent="editing">Edit</a>
                                             <button @click="destroy" class="q__destroy btn btn-outline-danger btn-sm">Delete</button>
-                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -37,11 +39,12 @@
 
 <script>
 
+import BestAnswerMarker from "./BestAnswerMarker.vue";
 import AuthorInfo from "./AuthorInfo.vue";
 
 export default {
     props: ['answer'],
-    components: { AuthorInfo },
+    components: { BestAnswerMarker, AuthorInfo },
     data(){
         return {
             editState: false,

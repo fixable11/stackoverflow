@@ -91,6 +91,10 @@
     margin-top: 20px;
 }
 
+.check-mark{
+    //color: #6c757d;
+}
+
 .answer{
     margin-top: 20px;
     .answer-media{
@@ -143,9 +147,14 @@
     a{
         cursor: pointer;
         color: $gray-600;
+        transition: color .25s;
 
         &.off, &.off:hover{
             color: $gray-500;
+        }
+
+        &:hover{
+            color: $green;
         }
 
         &.favorite{
@@ -157,7 +166,7 @@
             }
         }
 
-        &.vote-accepted{
+        &.vote_accepted{
             color: $green;
         }
 

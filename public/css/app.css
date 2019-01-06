@@ -10643,11 +10643,16 @@ a.text-dark:focus {
 .vote-controls a {
   cursor: pointer;
   color: #6c757d;
+  transition: color 0.25s;
 }
 
 .vote-controls a.off,
 .vote-controls a.off:hover {
   color: #adb5bd;
+}
+
+.vote-controls a:hover {
+  color: #38c172;
 }
 
 .vote-controls a.favorite.favorited,
@@ -10659,7 +10664,7 @@ a.text-dark:focus {
   color: #ffed4a;
 }
 
-.vote-controls a.vote-accepted {
+.vote-controls a.vote_accepted {
   color: #38c172;
 }
 

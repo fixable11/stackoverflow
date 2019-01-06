@@ -12,6 +12,18 @@
         mounted() {
             this.fetch();
         },
+        created() {
+            window.events.$on('bestAnswerAccepted', (bestAnswerId) => {
+                
+                this.items.forEach((item) => {
+                    if(item.id == bestAnswerId){
+                        item.is_best = true;
+                    } else {
+                        item.is_best = false;
+                    }        
+                });
+            });
+        },
         methods: {
             fetch(data){
                 axios.get(this.endpoint)

@@ -26,13 +26,12 @@
                 this.$emit('added');
             },
             remove(index) {
-                console.log(index);
 
                 this.items = this.items.filter(function (item, i){
                     return item.id != index; 
                 });
 
-                flash('Reply was deleted');
+                flash('Answer was deleted', 'success');
             },
         }
     }

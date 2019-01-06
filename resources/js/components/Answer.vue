@@ -59,13 +59,13 @@ export default {
             .then(response => {
                 this.bodyHtml = response.data.body_html;
                 this.editState = false;
-                flash(response.data.message);
+                flash(response.data.message, 'success')
             })
             .catch(error => {
-                console.dir(error);
-                flash(error.response.data.message, 'danger');
+                flash(error.response.data.message, 'error');
             });
         },
+
         editing(){
             this.editState = !this.editState;
             if(this.editState == false){
@@ -74,14 +74,39 @@ export default {
         },
 
         destroy(){
-            if(confirm("Are you sure?")){
-                axios.delete(this.endpoint).then(response => {
-                    if(response.status == 200){
-                        this.$emit('deleted', this.id);
-                    }
-                });
-                this.editState = false;
-            }
+            this.$toast.question('Are you sure about that?', 'Confirm',{
+                timeout: 20000,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                title: 'Hey',
+                position: 'center',
+                buttons: [
+                    ['<button><b>YES</b></button>', (instance, toast) => {
+
+                        axios.delete(this.endpoint).then(response => {
+                            if(response.status == 200){
+                                this.$emit('deleted', this.id);
+                            }
+                        });
+                        this.editState = false;
+
+                        instance.hide({
+                            transitionOut: 'fadeOut'
+                        }, toast, 'button');
+
+                    }, true],
+                    ['<button>NO</button>', function (instance, toast) {
+
+                        instance.hide({
+                            transitionOut: 'fadeOut'
+                        }, toast, 'button');
+
+                    }],
+                ],
+            });
         }
         
     }, 

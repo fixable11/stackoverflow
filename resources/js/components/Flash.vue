@@ -1,7 +1,4 @@
 <template>
-    <transition name="fade">
-        <div class="alert alert-flash" :class="'alert-' + level" v-show="show" v-text="body"></div>
-    </transition>
 </template>
 
 <script>
@@ -16,53 +13,31 @@
         },
         created(){
             window.events.$on('flash', (data) => {
-                this.flash(data);
+                
+                this.body = data.message;
+                this.level = data.level;
+                console.log(this.level);
+                
+                this.$toast[this.level](this.body, this.ucfirst(this.level), {
+                    position: 'bottomLeft',
+                    timeout: 3000,
+                });
             });
         }, 
         mounted(){
-            if(this.message){
-                this.flash();
-            }
+            // if(this.message){
+            //     this.flash();
+            // }
         },
         methods: {
-            flash(data = false){
-                if(data){
-                    this.body = data.message;
-                    this.level = data.level;
-                }
-                
-                this.show = true;
+            ucfirst(str) { 
 
-                setTimeout(() => {
-                    this.show = false;
-                }, 3000);
-            },
+                let f = str.charAt(0).toUpperCase();
+
+                return f + str.substr(1, str.length - 1);
+
+            }
 
         },
     }
 </script>
-
-<style>
-    .alert-flash {
-        position: fixed;
-        left: 25px;
-        bottom: 25px;
-    }
-
-    .fade-enter-active{
-        transition: opacity .5s;
-    }
-
-    .fade-enter-to{
-        opacity: 1;
-    }
-
-    .fade-enter,
-    .fade-leave-to{
-        opacity: 0;
-    }
-
-    .fade-leave-active {
-       transition: opacity 1s;
-    }
-</style>

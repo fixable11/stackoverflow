@@ -24,6 +24,11 @@ Vue.component('answers', require('./components/Answers.vue').default);
 Vue.component('answer', require('./components/Answer.vue').default);
 Vue.component('flash', require('./components/Flash.vue').default);
 
+
+import VueIziToast from 'vue-izitoast';
+
+Vue.use(VueIziToast);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

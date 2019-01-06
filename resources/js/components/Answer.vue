@@ -115,7 +115,7 @@ export default {
             return this.body.length < 3;
         },
         endpoint(){
-            return location.href + '/answers/' + this.id;
+            return location.pathname + '/answers/' + this.id;
         },
     },
 }

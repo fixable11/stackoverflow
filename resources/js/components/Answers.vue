@@ -5,7 +5,7 @@
         data(){
             return {
                 //dataSet: {}, //false,
-                endpoint: location.href + '/answers',
+                endpoint: location.pathname + '/answers',
                 items: [],
             }
         },

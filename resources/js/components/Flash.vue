@@ -16,7 +16,6 @@
                 
                 this.body = data.message;
                 this.level = data.level;
-                console.log(this.level);
                 
                 this.$toast[this.level](this.body, this.ucfirst(this.level), {
                     position: 'bottomLeft',

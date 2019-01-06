@@ -23,6 +23,7 @@ Vue.component('author-info', require('./components/AuthorInfo.vue').default);
 Vue.component('answers', require('./components/Answers.vue').default);
 Vue.component('answer', require('./components/Answer.vue').default);
 Vue.component('flash', require('./components/Flash.vue').default);
+Vue.component('favorite', require('./components/Favorite.vue').default);
 
 
 import VueIziToast from 'vue-izitoast';
@@ -49,64 +50,64 @@ $(document).ready(function () {
 
     /* Check mark */
     $('.check-mark').on('click', function (event) {
-        event.preventDefault();
+        // event.preventDefault();
  
-        let $ths = $(this);
+        // let $ths = $(this);
 
-        let $url = $ths.data('action');
+        // let $url = $ths.data('action');
 
-        $.ajax({
-            method: "POST",
-            url: $url,
-            data: {}
-        }).done(function (data) {
-            $('.check-mark').removeClass('vote-accepted');
-            $ths.addClass('vote-accepted');
-        });
+        // $.ajax({
+        //     method: "POST",
+        //     url: $url,
+        //     data: {}
+        // }).done(function (data) {
+        //     $('.check-mark').removeClass('vote-accepted');
+        //     $ths.addClass('vote-accepted');
+        // });
 
     });
 
      /* Star */
     $('.favorite').on('click', function (event) {
-        event.preventDefault();
+        // event.preventDefault();
  
-        let $ths = $(this);
+        // let $ths = $(this);
 
-        let $url = $ths.data('action');
-        let $method = $ths.data('method');
+        // let $url = $ths.data('action');
+        // let $method = $ths.data('method');
 
-        $.ajax({
-            method: $method,
-            url: $url,
-            data: {}
-        }).done(function (data) {
-            $('.favorites-count').text(data.favorites_count);
-            $ths.data('method') == "DELETE" ? $ths.data('method', 'POST') : $ths.data('method', 'DELETE');
-            $ths.toggleClass('favorited');
-        }).fail(function (data){
-            if(data.status == 401) window.location="/login";
-        });
+        // $.ajax({
+        //     method: $method,
+        //     url: $url,
+        //     data: {}
+        // }).done(function (data) {
+        //     $('.favorites-count').text(data.favorites_count);
+        //     $ths.data('method') == "DELETE" ? $ths.data('method', 'POST') : $ths.data('method', 'DELETE');
+        //     $ths.toggleClass('favorited');
+        // }).fail(function (data){
+        //     if(data.status == 401) window.location="/login";
+        // });
 
     });
 
     $('.vote-up, .vote-down').on('click', function (event) {
-        event.preventDefault();
+        // event.preventDefault();
  
-        let $ths = $(this);
+        // let $ths = $(this);
 
-        let $url = $ths.data('action');
-        let $method = $ths.data('method');
+        // let $url = $ths.data('action');
+        // let $method = $ths.data('method');
 
-        $.ajax({
-            method: $method,
-            url: $url,
-            data: {}
-        }).done(function (data) {
-            $ths.siblings('.votes-count').text(data.votes_count);
+        // $.ajax({
+        //     method: $method,
+        //     url: $url,
+        //     data: {}
+        // }).done(function (data) {
+        //     $ths.siblings('.votes-count').text(data.votes_count);
         
-        }).fail(function (data){
-            if(data.status == 401) window.location="/login";
-        });
+        // }).fail(function (data){
+        //     if(data.status == 401) window.location="/login";
+        // });
 
     });
 });

@@ -20,27 +20,7 @@
                 
                     <div class="media">
 
-                        <div class="vote-controls">
-                            <a href="#" 
-                            class="vote-up {{ Auth::guest() ? 'off' : '' }}"
-                            data-action="{{ route('questions.vote', $question->id) }}" 
-                            data-method="POST">
-                                <i class="fas fa-caret-up fa-3x"></i>
-                            </a>
-                            <span class="votes-count">{{ $question->votes_count }}</span>
-                            <a href="#" class="vote-down {{ Auth::guest() ? 'off' : '' }}"
-                            data-action="{{ route('questions.unvote', $question->id) }}"
-                            data-method="DELETE">
-                                <i class="fas fa-caret-down fa-3x"></i>
-                            </a>
-                            <a href="#" 
-                            class="favorite mt-2 {{ Auth::guest() ? 'off' : ($question->is_favorited ? 'favorited' : '') }}"
-                            data-action="{{ route('questions.favorite', $question->id) }}" 
-                            data-method="{{ $question->is_favorited ? 'DELETE' : 'POST' }}">
-                                <i class="fas fa-star fa-2x"></i>
-                                <span class="favorites-count">{{ $question->favorites_count }}</span>
-                            </a>
-                        </div>
+                    <favorite :question="{{ $question }}"></favorite>
 
                         <div class="media-body">
                             {!! $question->body_html !!}

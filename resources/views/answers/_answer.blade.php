@@ -1,4 +1,4 @@
-<answer :answer="{{ $answer }}" inline-template v-cloak>
+{{-- <answer :answer="{{ $answer }}" inline-template v-cloak>
     <div class="col-md-12">
         <div class="card answer">
             <div class="card-body">
@@ -23,11 +23,7 @@
                                         <a class="q__edit btn btn-outline-primary btn-sm" @click.prevent="editing">Edit</a>
                                     @endcan
                                     @can('delete', $answer)
-                                        <form class="form-delete" method="POST" action="{{ route('questions.answers.destroy', [$question->slug, $answer->id]) }}">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button onclick="return confirm('Are you sure?')" type="submit" class="q__destroy btn btn-outline-danger btn-sm">Delete</button>
-                                        </form>
+                                        <button @click="destroy" class="q__destroy btn btn-outline-danger btn-sm">Delete</button>
                                     @endcan
                                 </div>
                             </div>
@@ -37,4 +33,4 @@
             </div>
         </div>
     </div>
-</answer>
+</answer> --}}

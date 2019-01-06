@@ -39,6 +39,21 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+let auth = require('./auth.js');
+
+Vue.prototype.auth = function(...params){
+    if(!window.App.signedIn) return false;
+
+    if(typeof params[0] === 'string'){
+      return auth[params[0]](params[1]);
+    }
+
+    return params[0](window.App.user);
+
+}
+
+Vue.prototype.signedIn = window.App.signedIn;
+
 window.events = new Vue();
 
 window.flash = function(message, level = 'success'){

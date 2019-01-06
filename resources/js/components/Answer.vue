@@ -1,7 +1,47 @@
-<script>
-export default{
-    props: ['answer'],
+<template>
+    <transition name="fade">
+        <div class="col-md-12">
+            <div class="card answer">
+                <div class="card-body">
+                    <div class="media answer-media">
+        
+                        <!-- @include('answers._vote') -->
+        
+                        <div class="media-body answer-media-body">
+                            <form v-if="editState" method="POST" @submit.prevent="update">
+                                <textarea required name="body" class="form-control" rows="5" v-model="body"></textarea>
+                                <div class="answer__btn-group">
+                                    <button :disabled="isInvalid" type="submit" class="answer__btn btn btn-outline-primary btn-sm">Update</button>
+                                    <button class="answer_btn btn btn-outline-secondary btn-sm" @click.prevent="editing">Cancel</button>
+                                </div>
+                            </form>
+                            <div v-else>
+                                <div v-html="bodyHtml"></div>
+                                <div class="respondent">
+                                    <author-info :model="answer" label="Answered"></author-info>
+                                    <div class="respondent__buttons">
+                                        <div v-if="auth('updateAnswer', answer)">
+                                            <a class="q__edit btn btn-outline-primary btn-sm" @click.prevent="editing">Edit</a>
+                                            <button @click="destroy" class="q__destroy btn btn-outline-danger btn-sm">Delete</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
+</template>
 
+<script>
+
+import AuthorInfo from "./AuthorInfo.vue";
+
+export default {
+    props: ['answer'],
+    components: { AuthorInfo },
     data(){
         return {
             editState: false,
@@ -13,7 +53,7 @@ export default{
     },
     methods: {
         update(){
-            axios.patch(`/questions/${this.questionId}/answers/${this.id}`, {
+            axios.patch(this.endpoint, {
                 body: this.body
             })
             .then(response => {
@@ -32,12 +72,36 @@ export default{
                 this.body = this.answer.body;
             }
         },
+
+        destroy(){
+            if(confirm("Are you sure?")){
+                axios.delete(this.endpoint).then(response => {
+                    if(response.status == 200){
+                        this.$emit('deleted', this.id);
+                    }
+                });
+                this.editState = false;
+            }
+        }
         
     }, 
     computed: {
         isInvalid(){
             return this.body.length < 3;
-        }
+        },
+        endpoint(){
+            return location.href + '/answers/' + this.id;
+        },
     },
 }
 </script>
+
+<style>
+    .fade-leave-to{
+        opacity: 0;
+    }
+
+    .fade-leave-active {
+        transition: opacity .1s;
+    }
+</style>

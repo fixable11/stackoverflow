@@ -1,7 +1,26 @@
+<template>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card answers-meta">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h2>{{ title }}</h2>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <answer @deleted="remove($event)" v-for="(item) in items" :answer="item" :key="item.id"></answer>
+    </div>
+</template>
+
+
 <script>
     import Answer from "./Answer.vue";
     export default {
         components: { Answer },
+        props: ['answers', 'count'],
         data(){
             return {
                 //dataSet: {}, //false,
@@ -23,6 +42,11 @@
                     }        
                 });
             });
+        },
+        computed: {
+            title(){
+                return this.count + " " + (this.count > 1 ? "Answers" : "Answers");
+            }
         },
         methods: {
             fetch(data){

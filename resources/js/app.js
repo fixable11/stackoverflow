@@ -19,11 +19,10 @@ require('./bootstrap');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('author-info', require('./components/AuthorInfo.vue').default);
-Vue.component('answers', require('./components/Answers.vue').default);
-Vue.component('answer', require('./components/Answer.vue').default);
+
 Vue.component('flash', require('./components/Flash.vue').default);
-Vue.component('favorite', require('./components/Favorite.vue').default);
+Vue.component('single-question', require('./components/SingleQuestion.vue').default);
+Vue.component('author-info', require('./components/AuthorInfo.vue').default);
 
 
 import VueIziToast from 'vue-izitoast';

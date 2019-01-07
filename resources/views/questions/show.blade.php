@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                
+
                 <div class="card">
 
                     <div class="card-header">
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <answers :answers="{{ $question->answers }}" :count="{{ $question->answers_count }}"></answers>
+        <answers :question="{{ $question }}"></answers>
         @include('answers._create')
     </div>
 </single-question>

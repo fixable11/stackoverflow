@@ -12,6 +12,20 @@
         </div>
 
         <answer @deleted="remove($event)" v-for="(item) in items" :answer="item" :key="item.id"></answer>
+
+        <div class="col-md-12 mt-3 moreAnswers" v-if="nextUrl">
+            <button @click.prevent="fetch(nextUrl)" class="btn btn-outline-secondary">Load more answers</button>
+        </div>
+
+        <div class="ajaxLoaderWrap" v-show="loading">
+            <div class="ajaxLoader">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -20,16 +34,19 @@
     import Answer from "./Answer.vue";
     export default {
         components: { Answer },
-        props: ['answers', 'count'],
+        props: ['question'],
         data(){
             return {
                 //dataSet: {}, //false,
                 endpoint: location.pathname + '/answers',
                 items: [],
+                count: this.question.answers_count,
+                nextUrl: null,
+                loading: false,
             }
         },
         mounted() {
-            this.fetch();
+            this.fetch(this.endpoint);
         },
         created() {
             window.events.$on('bestAnswerAccepted', (bestAnswerId) => {
@@ -49,12 +66,16 @@
             }
         },
         methods: {
-            fetch(data){
-                axios.get(this.endpoint)
-                    .then(this.refresh);
+            fetch(endpoint){
+                this.loading = true;
+                axios.get(endpoint)
+                .then(this.refresh);
             },
             refresh({data}){
-                this.items = data;
+                console.log(data);
+                this.loading = false;
+                this.items.push(...data.data);
+                this.nextUrl = data.next_page_url;
             },
             add(item) {
                 this.items.push(item);

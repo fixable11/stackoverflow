@@ -13,6 +13,8 @@
 //Izitoast
 @import '~izitoast/dist/css/iziToast.min.css';
 
+@import 'loader';
+
 
 [v-cloak] {display: none}
 
@@ -194,4 +196,8 @@
 
 .answers-meta{
     margin-top: 20px;
+}
+
+.moreAnswers{
+    text-align: center;
 }

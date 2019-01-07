@@ -21,7 +21,7 @@
         data(){
             return {
                 //isBest: this.answer.is_best,
-                votesCount: this.answer.votes_count,
+                votesCount: this.answer.votes_count || 0,
                 id: this.answer.id,
             }
         },

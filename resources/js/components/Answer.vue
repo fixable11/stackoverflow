@@ -6,6 +6,7 @@
                     <div class="media answer-media">
                         
                         <div class="vote-controls">
+                            <vote :answer="answer"></vote>
                             <best-answer-marker :answer="answer"></best-answer-marker>
                         </div>
 
@@ -41,10 +42,11 @@
 
 import BestAnswerMarker from "./BestAnswerMarker.vue";
 import AuthorInfo from "./AuthorInfo.vue";
+import Vote from "./Vote.vue";
 
 export default {
     props: ['answer'],
-    components: { BestAnswerMarker, AuthorInfo },
+    components: { BestAnswerMarker, AuthorInfo, Vote },
     data(){
         return {
             editState: false,

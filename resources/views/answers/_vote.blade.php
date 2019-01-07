@@ -1,6 +1,6 @@
 <div class="vote-controls">
     
-        <a href="#" 
+        {{-- <a href="#" 
         class="vote-up {{ Auth::guest() ? 'off' : '' }}"
         data-action="{{ route('answers.vote', $answer->id) }}" 
         data-method="POST">
@@ -11,7 +11,7 @@
         data-action="{{ route('answers.unvote', $answer->id) }}"
         data-method="DELETE">
             <i class="fas fa-caret-down fa-3x"></i>
-        </a>
+        </a> --}}
         {{-- @can('accept', $answer)
             <a href="#" class="check-mark {{ $model->status }} mt-2" 
                 data-action="{{ route('answers.accept', $answer->id) }}">

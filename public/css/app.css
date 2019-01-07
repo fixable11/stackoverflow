@@ -10641,6 +10641,7 @@ a.text-dark:focus {
 }
 
 .vote-controls a {
+  display: inline-block;
   cursor: pointer;
   color: #6c757d;
   transition: color 0.25s;
@@ -10651,7 +10652,7 @@ a.text-dark:focus {
   color: #adb5bd;
 }
 
-.vote-controls a:hover {
+.vote-controls a.check-mark:hover {
   color: #38c172;
 }
 

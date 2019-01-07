@@ -5,7 +5,7 @@
             <i class="fas fa-check fa-2x"></i>
         </a>
 
-        <a v-if="accepted" href="#" class="mt-2" :class="isMarkedAsBest">
+        <a v-if="accepted" href="#" class="mt-2" @click.prevent="" :class="isMarkedAsBest">
             <i class="fas fa-check fa-2x"></i>
         </a>
     </div>
@@ -20,6 +20,9 @@
             },
             accepted(){
                 return !this.auth('markAnswerAsBest', this.answer) && this.answer.is_best;
+            },
+            endpoint(){
+                return `/answers/${this.id}/accept`;
             }
 
         },
@@ -31,7 +34,7 @@
         },
         methods: {
             create(){
-                axios.post(`/answers/${this.id}/accept`)
+                axios.post(this.endpoint)
                 .then(response => {
 
                     window.events.$emit('bestAnswerAccepted', this.id);

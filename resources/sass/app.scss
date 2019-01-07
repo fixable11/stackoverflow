@@ -145,6 +145,7 @@
     }
 
     a{
+        display: inline-block;
         cursor: pointer;
         color: $gray-600;
         transition: color .25s;
@@ -153,7 +154,7 @@
             color: $gray-500;
         }
 
-        &:hover{
+        &.check-mark:hover{
             color: $green;
         }
 

@@ -17,7 +17,12 @@ class VoteAnswerController extends Controller
         $vote = 1;
         auth()->user()->voteAnswer($answer, $vote);
 
-        return response()->json(['votes_count' => $answer->votes_count], 200);
+        if(request()->expectsJson()){
+            return response()->json([
+                'message' => 'Thanks for feedback',
+                'votes_count' => $answer->votes_count
+            ], 200);
+        }
     }
 
     public function destroy(Answer $answer)
@@ -25,6 +30,11 @@ class VoteAnswerController extends Controller
         $vote = -1;
         auth()->user()->voteAnswer($answer, $vote);
 
-        return response()->json(['votes_count' => $answer->votes_count], 200);
+        if(request()->expectsJson()){
+            return response()->json([
+                'message' => 'Thanks for feedback',
+                'votes_count' => $answer->votes_count
+            ], 200);
+        }
     }
 }

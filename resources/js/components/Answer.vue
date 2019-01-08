@@ -93,7 +93,7 @@ export default {
 
                         axios.delete(this.endpoint).then(response => {
                             if(response.status == 200){
-                                this.$emit('deleted', this.id);
+                                this.$emit('answerDeleted', this.id);
                             }
                         });
                         this.editState = false;

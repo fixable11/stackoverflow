@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <answer @deleted="remove($event)" v-for="(item) in items" :answer="item" :key="item.id"></answer>
+            <answer @answerDeleted="remove($event)" v-for="(item) in items" :answer="item" :key="item.id"></answer>
 
             <div class="col-md-12 mt-3 moreAnswers" v-if="nextUrl">
                 <button @click.prevent="fetch(nextUrl)" class="btn btn-outline-secondary">Load more answers</button>
@@ -64,6 +64,12 @@
                         item.is_best = false;
                     }        
                 });
+            });
+
+            window.events.$on('changedUrl', (newUrl) => {
+                let params = (new URL(this.nextUrl)).searchParams;
+                let page = params.get("page");
+                this.nextUrl = newUrl + '/answers?page=' + page;
             });
         },
         computed: {

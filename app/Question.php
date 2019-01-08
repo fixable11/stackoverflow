@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Exceptions\DuplicateTitleException;
 
 class Question extends Model
 {
@@ -11,7 +12,7 @@ class Question extends Model
 
     protected $fillable = ['title', 'body'];
 
-    protected $appends = ['created_date', 'is_favorited', 'favorites_count'];
+    protected $appends = ['created_date', 'is_favorited', 'favorites_count', 'body_html'];
 
     public function user()
     {
@@ -21,6 +22,10 @@ class Question extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = $value;
+        if($this->slug != str_slug($value) && static::where('slug', str_slug($value))->exists()){
+            throw new DuplicateTitleException;
+        }
+
         $this->attributes['slug'] = str_slug($value);
     }
 

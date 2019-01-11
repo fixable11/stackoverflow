@@ -74,7 +74,7 @@ export default {
     data() {
         return {
             editState: false,
-            id: this.question.id,
+            slug: this.question.slug,
             title: this.question.title,
             bodyHtml: this.question.body_html,
             editCache: {
@@ -111,8 +111,7 @@ export default {
                 flash(data.message, 'success');
             })
             .catch((error) => {
-                console.dir(error);
-                flash(error.response.data, 'error');
+                flash(error.response.data.message, 'error');
             });
         },
 
@@ -165,7 +164,7 @@ export default {
         },
 
         endpoint(){
-            return `/questions/${this.id}`;
+            return `/questions/${this.slug}`;
         },
 
     }

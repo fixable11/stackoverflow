@@ -8,21 +8,31 @@ use App\Question;
 use Illuminate\Support\Facades\Auth;
 
 class AnswersController extends Controller
-{
+{   
+
+    const ANSWERS_PER_PAGE = 3;
     
     public function __construct()
     {
         $this->middleware('auth')->except(['index']);
     }
 
+    /**
+     * Displays list of all answers
+     *
+     * @param Question $question
+     * @param Request $request
+     * @return void
+     */
     public function index(Question $question, Request $request)
     {
-        return $question->answers()->with('user')->simplePaginate(3);
+        return $question->answers()->with('user')->simplePaginate(self::ANSWERS_PER_PAGE);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Persist a newly created answer in database.
      *
+     * @param Question $question
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +42,7 @@ class AnswersController extends Controller
             'body' => 'required'
         ]);
 
-        $answer = $question->answers()->create(['body' => $request->body, 'user_id' => 1]);
+        $answer = $question->answers()->create(['body' => $request->body, 'user_id' => auth()->id()]);
 
         if(request()->expectsJson()){
             return response()->json([
@@ -40,27 +50,13 @@ class AnswersController extends Controller
                 'answer' => $answer->load('user'),
             ]);
         }
-
-        return back()->with('success', 'Your answer has been submited successfuly');
      }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Question $question, Answer $answer)
-    {
-        $this->authorize('update', $answer);
-
-        return view('answers.edit', compact('question', 'answer'));
-    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param Question $question
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */
@@ -87,6 +83,7 @@ class AnswersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param Question $question
      * @param  \App\Answer  $answer
      * @return \Illuminate\Http\Response
      */

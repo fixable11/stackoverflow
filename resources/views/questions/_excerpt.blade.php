@@ -3,7 +3,7 @@
     <div class="media">
             <div class="media-body o-h">
                 <div class="q">
-                    <h3 class="mt-0 q__title"><a href="{{ $question->url }}">{{ $question->title }}</a></h3>
+                    <h3 class="mt-0 q__title"><a href="{{ route('questions.show', $question->slug) }}">{{ $question->title }}</a></h3>
                     <div class="q__btngroup">
                         @can('update', $question)
                             <a class="q__edit btn btn-outline-primary btn-sm" href="{{ route('questions.edit', $question->id) }}">Edit</a>

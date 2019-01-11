@@ -12,18 +12,28 @@ class VoteQuestionController extends Controller
         $this->middleware('auth');
     }
 
+     /**
+     * Vote question up
+     *
+     * @param Question $question
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Question $question)
     {
-        $vote = 1;
-        auth()->user()->voteQuestion($question, $vote);
+        auth()->user()->voteQuestion($question, 1);
 
         return response()->json(['votes_count' => $question->votes_count], 200);
     }
 
+    /**
+     * Vote question down
+     *
+     * @param Question $question
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy(Question $question)
     {
-        $vote = -1;
-        auth()->user()->voteQuestion($question, $vote);
+        auth()->user()->voteQuestion($question, -1);
 
         return response()->json(['votes_count' => $question->votes_count], 200);
     }

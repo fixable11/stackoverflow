@@ -11,7 +11,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class QuestionsController extends Controller
-{
+{   
+
+    const QUESTIONS_PER_PAGE = 5;
 
     public function __construct()
     {
@@ -25,10 +27,9 @@ class QuestionsController extends Controller
      */
     public function index()
     {
+        $questions = Question::getPopular()->paginate(self::QUESTIONS_PER_PAGE);
 
-        $questions = Question::getPopular()->paginate(5);
-
-        return view('questions.index', compact('questions'))->render();
+        return view('questions.index', compact('questions'));
     }
 
     /**

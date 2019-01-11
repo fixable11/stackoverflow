@@ -12,10 +12,15 @@ class VoteAnswerController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Vote answer up
+     *
+     * @param Answer $answer
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Answer $answer)
     {
-        $vote = 1;
-        auth()->user()->voteAnswer($answer, $vote);
+        auth()->user()->voteAnswer($answer, 1);
 
         if(request()->expectsJson()){
             return response()->json([
@@ -25,10 +30,15 @@ class VoteAnswerController extends Controller
         }
     }
 
+    /**
+     * Vote answer down
+     *
+     * @param Answer $answer
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy(Answer $answer)
     {
-        $vote = -1;
-        auth()->user()->voteAnswer($answer, $vote);
+        auth()->user()->voteAnswer($answer, -1);
 
         if(request()->expectsJson()){
             return response()->json([

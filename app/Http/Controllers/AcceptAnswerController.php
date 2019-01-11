@@ -8,6 +8,12 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class AcceptAnswerController extends Controller
 {
+    /**
+     * Single Action Controller for marking answer as best
+     *
+     * @param Answer $answer
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\Routing\ResponseFactory
+     */
     public function __invoke(Answer $answer)
     {
         $this->authorize('accept', $answer);

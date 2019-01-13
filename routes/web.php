@@ -27,13 +27,17 @@ Route::delete('questions/{slug}/answers/{answer}', 'AnswersController@destroy');
 Route::patch('questions/{slug}/answers/{answer}', 'AnswersController@update');
 Route::resource('questions.answers', 'AnswersController')->except(['index', 'create', 'show', 'edit']);
 
+//Accept answer
 Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers.accept');
 
+//Favorite question
 Route::post('/questions/{slug}/favorites', 'FavoritesController@store')->name('questions.favorite');
 Route::delete('/questions/{slug}/favorites', 'FavoritesController@destroy')->name('questions.unfavorite');
 
+//Vote question
 Route::post('/questions/{question}/vote', 'VoteQuestionController@store')->name('questions.vote');
 Route::delete('/questions/{question}/unvote', 'VoteQuestionController@destroy')->name('questions.unvote');
 
+//Vote answer
 Route::post('/answers/{answer}/vote', 'VoteAnswerController@store')->name('answers.vote');
 Route::delete('/answers/{answer}/unvote', 'VoteAnswerController@destroy')->name('answers.unvote');

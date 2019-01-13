@@ -40,8 +40,12 @@
 
                     <div class="card-body">        
                         <div class="media">
+                        
+                        <div class="vote-controls">
+                            <favorite :question="question"></favorite>
 
-                        <favorite :question="question"></favorite>
+                            <vote :question="question"></vote>
+                        </div>
 
                             <div class="media-body">
                                 <div v-html="bodyHtml"></div>
@@ -67,9 +71,10 @@
 <script>
 import Answers from "./Answers.vue";
 import Favorite from "./Favorite.vue";
+import Vote from "./Vote.vue";
 
 export default {
-    components: { Answers, Favorite },
+    components: { Answers, Favorite, Vote },
     props: ['question', 'newQuestionRoute'],
     data() {
         return {

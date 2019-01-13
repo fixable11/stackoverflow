@@ -97,6 +97,7 @@
                 this.items = this.items.filter(function (item, i){
                     return item.id != index; 
                 });
+                this.count--
 
                 flash('Answer was deleted', 'success');
             },

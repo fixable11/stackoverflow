@@ -12,17 +12,55 @@
 
 <script>
     export default {
-        props: ['answer'],
+        props: {
+            answer: {
+                type: Object,
+                default: function () {
+                    return {
+                        default: true
+                    }
+                }
+            },
+            question: {
+                type: Object,
+                default: function () {
+                    return {
+                        default: true
+                    }
+                }
+            },
+        },
         computed: {
             endpoint(){
+                if(this.answer.default){
+                    return `/questions/${this.question.slug}/`;
+                }
                 return `/answers/${this.id}/`;
-            }
+            },
+            model(){
+                return this.answer.default ? this.question : this.answer; 
+            },
+            votesCount: {
+                get() {
+                    return this.counter || 0;
+                },
+                set(newValue) {
+                    this.counter = newValue;
+                }
+            },
+            id(){
+                return this.model.id;
+            }   
+        },
+        created() {
+            this.counter = this.model.votes_count;
         },
         data(){
             return {
                 //isBest: this.answer.is_best,
-                votesCount: this.answer.votes_count || 0,
-                id: this.answer.id,
+                // votesCount: this.model.votes_count || 0,
+                counter: 0,
+                // id: this.model.id,
             }
         },
         methods: {

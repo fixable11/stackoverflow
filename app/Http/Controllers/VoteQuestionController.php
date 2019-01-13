@@ -22,7 +22,12 @@ class VoteQuestionController extends Controller
     {
         auth()->user()->voteQuestion($question, 1);
 
-        return response()->json(['votes_count' => $question->votes_count], 200);
+        if(request()->expectsJson()){
+            return response()->json([
+                'message' => 'Thanks for feedback',
+                'votes_count' => $question->votes_count
+            ], 200);
+        }
     }
 
     /**
@@ -35,7 +40,12 @@ class VoteQuestionController extends Controller
     {
         auth()->user()->voteQuestion($question, -1);
 
-        return response()->json(['votes_count' => $question->votes_count], 200);
+        if(request()->expectsJson()){
+            return response()->json([
+                'message' => 'Thanks for feedback',
+                'votes_count' => $question->votes_count
+            ], 200);
+        }
     }
 
 }

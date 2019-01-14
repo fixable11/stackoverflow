@@ -82,6 +82,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Meta one-to-one relation.
+     * Returns UserMeta instance
+     *
+     * @return App\UserMeta;
+     */
+    public function meta()
+    {
+        return $this->hasOne(UserMeta::class);
+    }
+
+    /**
      * Polymorph questions' relation
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany

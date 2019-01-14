@@ -40,3 +40,6 @@ Route::delete('/questions/{question}/unvote', 'VoteQuestionController@destroy')-
 //Vote answer
 Route::post('/answers/{answer}/vote', 'VoteAnswerController@store')->name('answers.vote');
 Route::delete('/answers/{answer}/unvote', 'VoteAnswerController@destroy')->name('answers.unvote');
+
+//Profile page
+Route::get('/profiles/{nickname}', 'UserMetasController@index')->name('profiles.index');

@@ -20,7 +20,16 @@ class UserMeta extends Model
      *
      * @var array
      */
-    protected $fillable = ['nickname'];
+    protected $fillable = [
+        'nickname',
+        'description',
+        'avatar_path',
+        'birthday',
+        'gender',
+        'number',
+        'address',
+        'social_links',
+    ];
 
     /**
      * User one-to-one relation.

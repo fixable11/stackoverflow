@@ -23,12 +23,18 @@ require('./bootstrap');
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('single-question', require('./components/SingleQuestion.vue').default);
 Vue.component('author-info', require('./components/AuthorInfo.vue').default);
-Vue.component('upload-avatar', require('./components/UploadAvatar.vue').default);
+Vue.component('user-profile', require('./components/UserProfile.vue').default);
+Vue.component('routes', require('./components/Routes.vue').default);
 
 
 import VueIziToast from 'vue-izitoast';
+import VeeValidate from 'vee-validate';
 
 Vue.use(VueIziToast);
+Vue.use(VeeValidate);
+
+import {router} from './routes.js';
+import {store} from './store.js';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,7 +43,9 @@ Vue.use(VueIziToast);
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
+    store,
 });
 
 $(document).ready(function () {
@@ -48,66 +56,6 @@ $(document).ready(function () {
         }
     });
 
-    /* Check mark */
-    $('.check-mark').on('click', function (event) {
-        // event.preventDefault();
- 
-        // let $ths = $(this);
 
-        // let $url = $ths.data('action');
 
-        // $.ajax({
-        //     method: "POST",
-        //     url: $url,
-        //     data: {}
-        // }).done(function (data) {
-        //     $('.check-mark').removeClass('vote-accepted');
-        //     $ths.addClass('vote-accepted');
-        // });
-
-    });
-
-     /* Star */
-    $('.favorite').on('click', function (event) {
-        // event.preventDefault();
- 
-        // let $ths = $(this);
-
-        // let $url = $ths.data('action');
-        // let $method = $ths.data('method');
-
-        // $.ajax({
-        //     method: $method,
-        //     url: $url,
-        //     data: {}
-        // }).done(function (data) {
-        //     $('.favorites-count').text(data.favorites_count);
-        //     $ths.data('method') == "DELETE" ? $ths.data('method', 'POST') : $ths.data('method', 'DELETE');
-        //     $ths.toggleClass('favorited');
-        // }).fail(function (data){
-        //     if(data.status == 401) window.location="/login";
-        // });
-
-    });
-
-    $('.vote-up, .vote-down').on('click', function (event) {
-        // event.preventDefault();
- 
-        // let $ths = $(this);
-
-        // let $url = $ths.data('action');
-        // let $method = $ths.data('method');
-
-        // $.ajax({
-        //     method: $method,
-        //     url: $url,
-        //     data: {}
-        // }).done(function (data) {
-        //     $ths.siblings('.votes-count').text(data.votes_count);
-        
-        // }).fail(function (data){
-        //     if(data.status == 401) window.location="/login";
-        // });
-
-    });
 });

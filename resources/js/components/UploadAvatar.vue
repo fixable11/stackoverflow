@@ -5,7 +5,7 @@
                 <img :src="avatarPath" class="profile__avatarImg" alt="avatar">
             </div>
 
-            <form v-if="auth('updateAvatar', profile)" enctype="multipart/form-data" method="POST" @submit.prevent="">
+            <form v-if="auth('updateAvatar', user.meta)" enctype="multipart/form-data" method="POST" @submit.prevent="">
                 <input id="input-avatar" type="file" accept="image/*" @change="onChange" v-show="false">
                 <button @click="triggerUploadFile" type="submit" class="profile__avatarBtn">Upload new image</button>
             </form>
@@ -20,22 +20,23 @@
 
 export default {
         props: {
-            profile: {
-                type: Object,
-                required: true
-            },
-            defaultPath: {
-                type: String,
-                required: true
-            }
+
         },
         data(){
             return {
-                avatarPath: this.profile.avatar_path ? this.profile.avatar_path : this.defaultPath,
+                
             }
         },
         computed: {
-
+            user(){
+                return this.$store.state.user;
+            },
+            avatarPath(){
+                return this.user.meta.avatar_path ? this.user.meta.avatar_path : this.user.avatar;
+            },
+            endpoint(){
+                return `/api/users/${this.user.meta.nickname}/avatar`;
+            }
         },
         methods: {
             onChange(e){
@@ -50,10 +51,11 @@ export default {
                 }
 
                 let data = new FormData();
+                
                 data.append('avatar', avatar);
-                axios.post(`/api/users/${this.profile.nickname}/avatar`, data)
+
+                axios.post(this.endpoint, data)
                     .then(({data}) => {
-                        console.log(data);
                         document.querySelector('.profile__avatarImg').src = data.path;
                         flash('Avatar uploaded', 'success');
                     })

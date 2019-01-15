@@ -16,6 +16,10 @@ module.exports = {
 
     updateAvatar(profile){
         return user.id === profile.user_id;   
+    },
+
+    updateProfile(profile){
+        return user.id === profile.id;   
     }
 
     // isAdmin(){

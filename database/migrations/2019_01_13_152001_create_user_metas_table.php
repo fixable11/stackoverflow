@@ -15,18 +15,17 @@ class CreateUserMetasTable extends Migration
     {
         Schema::create('user_metas', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->string('nickname');
+            $table->unsignedInteger('user_id')->unique();;
+            $table->string('nickname')->unique();
             $table->text('description');
             $table->string('avatar_path')->nullable();
             $table->date('birthday');
             $table->string('gender');
-            $table->string('number');
+            $table->string('number')->unique();;
             $table->string('address')->nullable();
             $table->json('social_links')->nullable();
             $table->timestamps();
-
-            $table->unique(['user_id', 'nickname', 'number']);
+            
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');

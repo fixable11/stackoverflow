@@ -42,4 +42,9 @@ Route::post('/answers/{answer}/vote', 'VoteAnswerController@store')->name('answe
 Route::delete('/answers/{answer}/unvote', 'VoteAnswerController@destroy')->name('answers.unvote');
 
 //Profile page
-Route::get('/profiles/{nickname}', 'UserMetasController@index')->name('profiles.index');
+Route::get('/profiles/{nickname}', 'UserMetasController@show')->name('profiles.show');
+
+//Upload image api
+Route::prefix('api')->group(function () {
+    Route::post('users/{nickname}/avatar', 'Api\UserAvatarController@store');
+});

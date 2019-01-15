@@ -11,6 +11,13 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * Providing eager loading
+     *
+     * @var array
+     */
+    protected $with = ['meta'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -25,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $appends = [
-        'url', 'avatar'
+        'avatar'
     ];
 
     /**
@@ -34,7 +41,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token', 
+        'created_at', 
+        'updated_at',
+        'email_verified_at',
     ];
 
     /**
@@ -64,10 +75,7 @@ class User extends Authenticatable
      */
     public function getAvatarAttribute()
     {
-        $email = $this->email;
-        $size = 32;
-        return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "&s=" . $size;
-
+        return $this->meta->avatarPath();
     }
 
     /**

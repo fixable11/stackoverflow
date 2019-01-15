@@ -12,11 +12,9 @@ class UserMetasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nickname)
+    public function index()
     {
-        $profile = UserMeta::with('user')->where('nickname', $nickname)->firstOrFail();
         
-        return view('profiles.index', compact('profile'));
     }
 
     /**
@@ -46,9 +44,11 @@ class UserMetasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($nickname)
     {
-        //
+        $profile = UserMeta::with('user')->where('nickname', $nickname)->firstOrFail();
+        
+        return view('profiles.show', compact('profile'));
     }
 
     /**

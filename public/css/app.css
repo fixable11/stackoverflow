@@ -10570,6 +10570,11 @@ a.text-dark:focus {
   padding-top: 30px;
 }
 
+.profile__avatarWrap {
+  max-height: 200px;
+  overflow: hidden;
+}
+
 .profile__avatar {
   text-align: center;
 }
@@ -10599,46 +10604,54 @@ a.text-dark:focus {
   margin-left: 5px;
 }
 
-.profile .profileAbout__title {
+.profile__avatarBtn {
+  margin-top: 10px;
+  border: none;
+  background-color: #38c172;
+  color: #fff;
+  cursor: pointer;
+}
+
+.profileAbout__title {
   margin-top: 30px;
 }
 
-.profile .profileAbout__titleIcon {
+.profileAbout__titleIcon {
   font-size: 20px;
 }
 
-.profile .profileAbout__titleSpan {
+.profileAbout__titleSpan {
   margin-left: 5px;
   font-size: 18px;
 }
 
-.profile .profileAbout__description {
+.profileAbout__description {
   margin-top: 10px;
 }
 
-.profile .contactInfo__title {
+.contactInfo__title {
   font-size: 16px;
   color: #888181;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.profile .contactInfo__item {
+.contactInfo__item {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-.profile .contactInfo__name {
+.contactInfo__name {
   font-size: 16px;
   width: 100px;
 }
 
-.profile .contactInfo__value {
+.contactInfo__value {
   margin-left: 50px;
 }
 
-.profile .contactInfo__sites {
+.contactInfo__sites {
   list-style-type: none;
   display: flex;
 }

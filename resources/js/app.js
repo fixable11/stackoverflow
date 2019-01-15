@@ -23,6 +23,7 @@ require('./bootstrap');
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('single-question', require('./components/SingleQuestion.vue').default);
 Vue.component('author-info', require('./components/AuthorInfo.vue').default);
+Vue.component('upload-avatar', require('./components/UploadAvatar.vue').default);
 
 
 import VueIziToast from 'vue-izitoast';

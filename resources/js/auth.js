@@ -11,8 +11,11 @@ module.exports = {
     },
     
     updateQuestion(question){
-        return user.id === question.user_id; 
-        
+        return user.id === question.user_id;   
+    },
+
+    updateAvatar(profile){
+        return user.id === profile.user_id;   
     }
 
     // isAdmin(){

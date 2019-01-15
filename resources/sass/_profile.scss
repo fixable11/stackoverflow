@@ -5,6 +5,11 @@
     padding-bottom: 30px;
     padding-top: 30px;
 
+    &__avatarWrap {
+       max-height: 200px;
+       overflow: hidden;
+    }
+
     &__avatar {
         text-align: center;
     }
@@ -33,48 +38,57 @@
         margin-left: 5px;
     }
 
-    .profileAbout{
-        &__title{
-            margin-top: 30px;
-        }
-        &__titleIcon{
-            font-size: 20px;
-        }
-        &__titleSpan{
-            margin-left: 5px;
-            font-size: 18px;
-        }
-        &__description{
-            margin-top: 10px;
-        }
+    &__avatarBtn{
+        margin-top: 10px;
+        border: none;
+        background-color: $green;
+        color: #fff;
+        cursor: pointer;
     }
 
-    .contactInfo{
-        &__title{
-            font-size: 16px;
-            color: #888181;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        &__item{
-            display: flex;
-            align-items: center;
-            width: 100%;
+}
 
-        }
-        &__name{
-            font-size: 16px;
-            width: 100px;
-        }
-        &__value{
-            margin-left: 50px;
-        }
-        &__sites{
-            list-style-type: none;
-            display: flex;
-        }
-        &__site{
-            
-        }
+.profileAbout{
+    &__title{
+        margin-top: 30px;
+    }
+    &__titleIcon{
+        font-size: 20px;
+    }
+    &__titleSpan{
+        margin-left: 5px;
+        font-size: 18px;
+    }
+    &__description{
+        margin-top: 10px;
+    }
+}
+
+.contactInfo{
+    &__title{
+        font-size: 16px;
+        color: #888181;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    &__item{
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+    }
+    &__name{
+        font-size: 16px;
+        width: 100px;
+    }
+    &__value{
+        margin-left: 50px;
+    }
+    &__sites{
+        list-style-type: none;
+        display: flex;
+    }
+    &__site{
+        
     }
 }

@@ -32,7 +32,7 @@ export default {
                 return this.$store.state.user;
             },
             avatarPath(){
-                return this.user.meta.avatar_path ? this.user.meta.avatar_path : this.user.avatar;
+                return this.user.meta.avatar_path;
             },
             endpoint(){
                 return `/api/users/${this.user.meta.nickname}/avatar`;

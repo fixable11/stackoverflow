@@ -69,6 +69,10 @@ class UserAvatarController extends Controller
     {
         $oldImage = public_path(auth()->user()->meta->avatar_path);
 
+        if($oldImage == UserMeta::DEFAULT_AVATAR_PATH){
+            return;
+        }
+
         if (File::exists($oldImage) && File::isFile($oldImage)) {
             unlink($oldImage);
         }

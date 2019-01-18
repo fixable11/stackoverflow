@@ -6,11 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class UserMeta extends Model
-{
+{   
+
+    const DEFAULT_AVATAR_PATH = '/images/no-avatar.jpg';
 
     protected $casts = [
         'social_links' => 'array',
         'nickname' => 'string'
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        //'avatar_path'
     ];
 
     protected $primaryKey = 'nickname';
@@ -42,7 +53,7 @@ class UserMeta extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function avatarPath(){
-        return $this->avatar_path ?: '/images/no-avatar.jpg';
+    public function getAvatarPathAttribute($avatar_path){
+        return $avatar_path ?: self::DEFAULT_AVATAR_PATH;
     }    
 }

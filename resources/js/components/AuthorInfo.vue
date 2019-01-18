@@ -3,7 +3,7 @@
         <div class="text-muted">{{ postDate }}</div>
         <div class="respondent__personBot">
             <a class="gravatarWrap pr-2" :href="user.url">
-                <img class="gravatar" :src="user.avatar" alt="img">
+                <img class="gravatar" :src="user.meta.avatar_path" alt="img">
             </a>
             <div class="media-body respondent__personName">
                 <a :href="user.url">{{ user.name }}</a>

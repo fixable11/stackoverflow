@@ -164,7 +164,7 @@ export default {
                    nickname: this.user().meta.nickname,
                    description: this.user().meta.description,
                    number: this.user().meta.number,
-                   social_links: this.user().meta.social_links,
+                   social_links: this.user().meta.social_links || [],
                    birthday: this.user().meta.birthday,
                    gender: this.user().meta.gender,                
                }

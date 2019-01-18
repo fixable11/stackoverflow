@@ -32,7 +32,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $appends = [
-        'avatar'
     ];
 
     /**
@@ -66,16 +65,6 @@ class User extends Authenticatable
     public function getUrlAttribute()
     {
         return '#';
-    }
-
-    /**
-     * Returns link to user's avatar
-     *
-     * @return string
-     */
-    public function getAvatarAttribute()
-    {
-        return $this->meta->avatarPath();
     }
 
     /**

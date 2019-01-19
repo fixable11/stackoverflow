@@ -11,13 +11,13 @@ const routes = [
         name: 'profile.settings',
         path: '/profiles/:nickname/settings',
         component: UserProfileSettings,
-        //props: true,
+        props: true,
     },
     {
         name: 'profile',
         path: '/profiles/:nickname',
         component: UserProfile,
-        //props: true,
+        props: true
     },
 ];
 

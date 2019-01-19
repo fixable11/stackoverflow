@@ -6,7 +6,7 @@
                 <img class="gravatar" :src="user.meta.avatar_path" alt="img">
             </a>
             <div class="media-body respondent__personName">
-                <a :href="user.url">{{ user.name }}</a>
+                <a :href="user_url">{{ user.meta.full_name }}</a>
             </div>
         </div>
     </div>
@@ -23,6 +23,7 @@
         data(){
             return {
                 user: this.model.user,
+                user_url: '/profiles/' + this.model.user.meta.nickname
             }
         }
     }

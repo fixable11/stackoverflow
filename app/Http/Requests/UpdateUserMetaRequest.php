@@ -25,8 +25,8 @@ class UpdateUserMetaRequest extends FormRequest
     public function rules()
     {
         return [
-            'inputData.name' => 'required|regex:/^[a-z. ]+$/i',
-            'inputData.meta.address' => 'nullable|regex:/^[0-9a-z., ]+$/i',
+            'inputData.meta.full_name' => 'required|regex:/^[a-z. ]+$/i',
+            'inputData.meta.address' => 'nullable|regex:/^[0-9a-z\'\.,\-_ ]+$/i',
             'inputData.meta.nickname' => 'required|alpha_num',
             'inputData.meta.description' => 'nullable|regex:/^[0-9a-z.,+-_@ ]+$/i',
             'inputData.meta.number' => 'nullable|digits:12',
@@ -49,7 +49,7 @@ class UpdateUserMetaRequest extends FormRequest
     public function attributes()
     {
         return [
-            'inputData.name' => 'Name',
+            'inputData.meta.full_name' => 'Full name',
             'inputData.meta.address' => 'Address',
             'inputData.meta.nickname' => 'Nickname',
             'inputData.meta.description' => 'Description',

@@ -19,20 +19,18 @@
 
 
 export default {
-        props: {
-
-        },
+        props: ['specificUser'],
         data(){
             return {
-                
+                user: this.specificUser
             }
         },
         computed: {
-            user(){
-                return this.$store.state.user;
-            },
+            // user(){
+            //     return this.$store.state.user;
+            // },
             avatarPath(){
-                return this.user.meta.avatar_path;
+                return this.specificUser.meta.avatar_path;
             },
             endpoint(){
                 return `/api/users/${this.user.meta.nickname}/avatar`;
@@ -56,6 +54,9 @@ export default {
 
                 axios.post(this.endpoint, data)
                     .then(({data}) => {
+                        
+                        events.$emit('changedAvatarPath', data.path);
+
                         document.querySelector('.profile__avatarImg').src = data.path;
                         flash('Avatar uploaded', 'success');
                     })

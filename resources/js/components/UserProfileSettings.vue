@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <div class="lead">Full name</div>
                         <input name="fullname" 
-                        v-model="inputData.name"
+                        v-model="inputData.meta.full_name"
                         type="text" 
                         v-validate.initial="{ required: true, regex: /^[a-z. ]+$/i }"
                         class="form-control" 
@@ -23,7 +23,7 @@
                         <div class="lead">Address</div>
                         <input name="address" 
                         v-model="inputData.meta.address"
-                        v-validate.initial="{ required: true, regex: /^[0-9a-z., ]+$/i }"
+                        v-validate.initial="{ regex: /^[0-9a-z., ]+$/i }"
                         type="text" 
                         class="form-control" 
                         placeholder="Address">
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <div class="lead">Description</div>
                         <textarea name="description"
-                        v-validate.initial="{ required: true, regex: /^[0-9a-z.,+-_@ ]+$/i }"
+                        v-validate.initial="{ regex: /^[0-9a-z.,+-_@ ]+$/i }"
                         rows="6"
                         v-model="inputData.meta.description"
                         class="form-control">
@@ -62,7 +62,7 @@
                             v-model="inputData.meta.number" 
                             type="text" 
                             class="form-control"
-                            v-validate.initial="'digits:12|required'"
+                            v-validate.initial="'digits:12'"
                             placeholder="Number">
                             <span class="profileSettings__leadingPlus">+</span>
                         </div>
@@ -95,7 +95,7 @@
                                 <input :name="'social_links[title][' + index + ']'"
                                 v-model="item.title" 
                                 type="text"
-                                v-validate.initial="'required|alpha_num'"
+                                v-validate.initial="'alpha_num'"
                                 class="form-control form-control-sm profileSettings__socialLink" 
                                 placeholder="Social link">
                                 <div class="profileSettings__invalid">
@@ -124,7 +124,7 @@
                         <div class="lead">Birthday</div>
                         <input name="birthday" 
                         v-model="inputData.meta.birthday" 
-                        v-validate.initial="'date_format:YYYY-MM-DD|required'"
+                        v-validate.initial="'date_format:YYYY-MM-DD'"
                         type="date"
                         class="form-control" 
                         placeholder="Birthday">
@@ -135,8 +135,8 @@
                     <div class="form-group">
                         <div class="lead">Gender</div>
                         <select name="gender" v-model="inputData.meta.gender" 
-                        class="custom-select" required
-                        v-validate.initial="'required|included:male,female'">
+                        class="custom-select"
+                        v-validate.initial="'included:male,female'">
                             <option disabled value="">Select one</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -157,25 +157,31 @@
 export default {
     data() {
         return {
-           inputData: {
-               name: this.user().name,
-               meta: {
-                   address: this.user().meta.address,
-                   nickname: this.user().meta.nickname,
-                   description: this.user().meta.description,
-                   number: this.user().meta.number,
-                   social_links: this.user().meta.social_links || [],
-                   birthday: this.user().meta.birthday,
-                   gender: this.user().meta.gender,                
-               }
+            inputData: {
+                meta: {
+                    full_name: this.user().meta.full_name,
+                    address: this.user().meta.address,
+                    nickname: this.user().meta.nickname,
+                    description: this.user().meta.description,
+                    number: this.user().meta.number,
+                    social_links: this.user().meta.social_links || [],
+                    birthday: this.user().meta.birthday,
+                    gender: this.user().meta.gender,                
+                }
            },
         }
     },
     methods: {
         user(){
-            return window.App.user;
+            return this.$store.getters.user;
         },
         update(){
+
+            if(!window.App.signedIn){
+                flash('Please sign in to change profile', 'info');
+                return;
+            }
+
             axios.put(this.endpoint, {
                 inputData: this.inputData
             })

@@ -25,6 +25,7 @@ Vue.component('single-question', require('./components/SingleQuestion.vue').defa
 Vue.component('author-info', require('./components/AuthorInfo.vue').default);
 Vue.component('user-profile', require('./components/UserProfile.vue').default);
 Vue.component('routes', require('./components/Routes.vue').default);
+Vue.component('navbar', require('./components/Navbar.vue').default);
 
 
 import VueIziToast from 'vue-izitoast';
@@ -46,6 +47,16 @@ const app = new Vue({
     el: '#app',
     router,
     store,
+    created(){    
+        if(window.App.signedIn){
+            this.fetchUser();
+        }
+    },
+    methods: {
+        async fetchUser(){
+            await this.$store.dispatch('fetchUser', window.App.user.meta.nickname);
+        }
+    },
 });
 
 $(document).ready(function () {

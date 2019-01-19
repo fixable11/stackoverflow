@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4">
 
-                <upload-avatar></upload-avatar>
+                <upload-avatar :specificUser="specificUser"></upload-avatar>
 
                 <div class="profile__address"></div>
                 
@@ -79,10 +79,10 @@
 
 <script>
 import UploadAvatar from "./UploadAvatar.vue";
-import { mapGetters } from 'vuex';
 
 export default {
     components: { UploadAvatar },
+    props: ['specificUser'],
     
     data() {
         return {
@@ -92,21 +92,43 @@ export default {
     methods: {
         whetherLastElement(index, array){
             return index != (array.length - 1);
-        }
+        },
     },
     computed: {
-        ...mapGetters([
-            'fullName',
-            'address',
-            'nickname',
-            'description',
-            'number',
-            'socialLinks',
-            'birthday',
-            'gender',
-            'email',
-            'user'
-        ]),
+        user(){
+            if(window.App.user && this.specificUser.id === window.App.user.id){
+                return this.$store.getters.user;
+            }
+            return this.specificUser;
+        },
+        fullName(){
+            return this.user.meta.full_name;
+        },
+        address(){
+            return this.user.meta.address;
+        },
+        nickname(){
+            return this.user.meta.nickname;
+        },
+        description(){
+            return this.user.meta.description;
+        },
+        number(){
+            return this.user.meta.number;
+        },
+        socialLinks(){
+            return this.user.meta.social_links;
+        },
+        birthday(){
+            return this.user.meta.birthday;
+        },
+        gender(){
+            return this.user.meta.gender;
+        },
+        email(){
+            return this.user.email;
+        },
+
     }
 }
 </script>

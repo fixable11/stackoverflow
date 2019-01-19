@@ -10,7 +10,7 @@ class UserProfileController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth')->except(['show, fetchUser']);
+        $this->middleware('auth')->except('show', 'fetchUser');
     }
 
     /**
@@ -76,10 +76,6 @@ class UserProfileController extends Controller
      */
     public function persistToDatabase(array $data)
     {
-        auth()->user()->update([
-            'name' => $data['name'],
-        ]);
-
         $userMeta = UserMeta::where('user_id', auth()->id())->firstOrFail();
 
         $userMeta->update($data['meta']);

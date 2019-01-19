@@ -10,6 +10,18 @@ class UserMeta extends Model
 
     const DEFAULT_AVATAR_PATH = '/images/no-avatar.jpg';
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
         'social_links' => 'array',
         'nickname' => 'string'
@@ -32,6 +44,7 @@ class UserMeta extends Model
      * @var array
      */
     protected $fillable = [
+        'full_name',
         'nickname',
         'description',
         'avatar_path',

@@ -11,6 +11,7 @@ $factory->define(App\UserMeta::class, function (Faker $faker) {
     }
     $gender = ['male', 'female'];
     return [
+        'full_name' => $faker->name,
         'nickname' => $faker->firstName(),
         'description' => $faker->text(),
         'avatar_path' => null,

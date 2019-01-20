@@ -9,6 +9,7 @@ class UserMeta extends Model
 {   
 
     const DEFAULT_AVATAR_PATH = '/images/no-avatar.jpg';
+    const AMOUNT_OF_USERS = 5;
 
     /**
      * Indicates if the model should be timestamped.
@@ -68,5 +69,61 @@ class UserMeta extends Model
 
     public function getAvatarPathAttribute($avatar_path){
         return $avatar_path ?: self::DEFAULT_AVATAR_PATH;
-    }    
+    }
+    
+    /**
+     * Searches user by full name.
+     *
+     * @param string $full_name
+     * @return array
+     */
+    public static function searchByFullName($full_name)
+    {
+        return UserMeta::where('full_name', 'LIKE', "$full_name%")
+            ->take(self::AMOUNT_OF_USERS)
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item['full_name'] => $item['nickname']];
+            })
+            ->toArray();
+    }
+
+    /**
+     * Searches user by nickname.
+     * Returns tributable array
+     *
+     * @param string $nickname
+     * @return array
+     */
+    public static function searchByNickName($nickname)
+    {
+        return UserMeta::where('nickname', 'LIKE', "$nickname%")
+            ->take(self::AMOUNT_OF_USERS)
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item['nickname'] => $item['nickname']];
+            })
+            ->toArray();
+    }
+
+    /**
+     * Forms array to tribute it to client side.
+     * Returns tributable array
+     *
+     * @param [type] $collection
+     * @return void
+     */
+    public static function arraysToTribute($collection)
+    {
+        $result = [];
+
+        foreach ($collection as $key => $value) {
+            array_push($result, [
+                'key' => $key,
+                'value' => $value
+            ]);
+        }
+
+        return $result;
+    }
 }

@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import UserProfile from './components/UserProfile.vue';
 import UserProfileSettings from './components/UserProfileSettings.vue';
+import Messages from './components/messages/Messages.vue';
 
 const routes = [
     {
@@ -17,6 +18,12 @@ const routes = [
         name: 'profile',
         path: '/profiles/:nickname',
         component: UserProfile,
+        props: true
+    },
+    {
+        name: 'profile.messages',
+        path: '/profiles/:nickname/messages',
+        component: Messages,
         props: true
     },
 ];

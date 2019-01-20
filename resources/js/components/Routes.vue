@@ -7,6 +7,10 @@
                     Profile
                 </router-link>
 
+                <router-link v-if="auth('updateProfile', specificUser)" class="btn btn-secondary btn-sm" :to="{ name: 'profile.messages', params: { nickname: nickname } }">
+                    Messages
+                </router-link>
+
                 <router-link v-if="auth('updateProfile', specificUser)" class="btn btn-secondary btn-sm" :to="{ name: 'profile.settings', params: { nickname: nickname } }">
                     Settings
                 </router-link>

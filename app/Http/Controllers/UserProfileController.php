@@ -27,7 +27,7 @@ class UserProfileController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show user's settings view
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -41,6 +41,23 @@ class UserProfileController extends Controller
         $meta = UserMeta::with('user')->where('nickname', $nickname)->firstOrFail();
         
         return view('profiles.settings', compact('meta'));
+    }
+
+    /**
+     * Show user's messages view
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showMessages($nickname)
+    {
+        $profile = UserMeta::where('nickname', $nickname)->firstOrFail();
+
+        $this->authorize('updateProfile', $profile);
+
+        $meta = UserMeta::with('user')->where('nickname', $nickname)->firstOrFail();
+        
+        return view('profiles.messages', compact('meta'));
     }
 
     /**
@@ -96,6 +113,29 @@ class UserProfileController extends Controller
 
         return response()->json([
             'user' => $meta->user
+        ], 200);
+    }
+
+    /**
+     * Fetch all users by their full name or nickname
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function fetchAll(Request $request)
+    {
+        $search = request('name');
+
+        $fullnames = UserMeta::searchByFullName($search);
+
+        $nicknames = UserMeta::searchByNickName($search);
+
+        $collection = array_merge($fullnames, $nicknames);
+
+        $users = UserMeta::arraysToTribute($collection);
+
+        return response()->json([
+            'users' => $users
         ], 200);
     }
 

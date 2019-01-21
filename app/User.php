@@ -58,6 +58,48 @@ class User extends Authenticatable
     }
 
     /**
+     * A user can send a message
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sent()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    /**
+     * A user can also receive a message
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function received()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    /**
+     * Sends message to specific user
+     *
+     * @param App\User $receiver
+     * @param string $body
+     * @param string $subject
+     * @return void
+     */
+    public function sendMessageTo(User $receiver, $body, $subject)
+    {
+        $message = Message::create([
+            'body'       => $body,
+            'subject'    => $subject,
+            'sender_id'    => $this->id,
+            'receiver_id' => $receiver->id,
+        ]);   
+        
+        $message->setStatusToOutgoing($this);
+
+        $message->setStatusToIncoming($receiver);   
+    }
+
+    /**
      * User's personal page link
      *
      * @return string

@@ -1,17 +1,23 @@
 <template>
     <div class="col-12">
-        <form>
+        <form @submit.prevent="sendMessage($event)">
             <div class="lead">Send to @nickname</div>
             <vue-tribute class="form-group" :options="tributeOptions">  
                 <input id="user_email" 
                 @keydown.once="isTypeing($event.target)" 
                 type="text"
-                class="form-control" 
+                class="form-control"
+                name="nickname"
+                v-model="nickname"
                 placeholder="@...">
             </vue-tribute>
+            <div class="lead">Subject</div>
+            <div class="form-group">
+                <input name="subject" type="text" class="form-control" v-model="subject">
+            </div>
             <div class="lead">Message body</div>
             <div class="form-group">
-                <textarea class="form-control" rows="5"></textarea>
+                <textarea v-model="body" class="form-control" rows="5"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Send</button>
             
@@ -27,6 +33,9 @@ export default {
     },
     data() {
         return {
+            nickname: '',
+            subject: '',
+            body: '',
             typingText: '',
             cb: null,
             tributeOptions: {
@@ -69,7 +78,33 @@ export default {
                 cb(data.users);
             })
             .catch((error) => {
+
             });
+        },
+
+        sendMessage($event){
+
+            let nickname = this.nickname;
+
+            axios.post(this.sendMessageEndpoint, {
+                nickname: nickname.replace(/@/g, ''),
+                body: this.body,
+                subject: this.subject,
+            })
+            .then(({data}) => {
+                flash(data.message, 'success');
+                $event.target.reset()
+            })
+            .catch((error) => {
+                let errorsObj = error.response.data.errors;
+
+                for(let key in errorsObj){
+                    errorsObj[key].forEach(value => {
+                        flash(value, 'error');
+                    });
+                }
+            });
+            
         }
 
     },
@@ -77,7 +112,9 @@ export default {
         endpoint(){
             return '/api/users';
         },
-        
+        sendMessageEndpoint(){
+            return '/profiles/' + this.$store.getters.nickname + '/message/send';
+        },
     }
 }
 </script>

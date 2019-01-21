@@ -45,6 +45,7 @@ Route::delete('/answers/{answer}/unvote', 'VoteAnswerController@destroy')->name(
 Route::get('/profiles/{nickname}', 'UserProfileController@show')->name('profiles.show');
 Route::get('/profiles/{nickname}/settings', 'UserProfileController@showSettings')->name('profiles.settings');
 Route::get('/profiles/{nickname}/messages', 'UserProfileController@showMessages')->name('profiles.messages');
+Route::post('/profiles/{nickname}/message/send', 'ConversationController@sendMessage');
 
 
 Route::prefix('api')->group(function () {

@@ -173,3 +173,21 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.incoming, .outgoing{
+    margin-top: 20px;
+    &__imgWrap{
+        display: block;
+    }
+    &__img {
+        width: 50px;
+        height: 50px;
+    }
+    &__body{
+        margin-left: 10px;
+    }
+}
+
+.sendmessage{
+    margin-top: 20px;
+}

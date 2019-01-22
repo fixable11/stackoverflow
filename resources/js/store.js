@@ -20,6 +20,8 @@ export const store = new Vuex.Store({
                 gender: '',
             }
         },
+        incomingMessages: [],
+        outgoingMessages: []
     },
     mutations: {
         updateUserData(state, inputData){
@@ -35,6 +37,26 @@ export const store = new Vuex.Store({
         },
         changeAvatarPath(state, newPath){
             state.user.meta.avatar_path = newPath;
+        },
+
+        addIncomingMessages(state, messages){
+            state.incomingMessages = messages;
+        },
+
+        removeIncomingMessage(state, message){
+            state.incomingMessages.splice(message, 1);
+        },
+
+        addOutgoingMessages(state, messages){
+            state.outgoingMessages = messages;
+        },
+
+        removeOutgoingMessage(state, message){
+            state.outgoingMessages.splice(message, 1);
+        },
+
+        addOutgoingMessage(state, message){
+            state.outgoingMessages.push(message);
         }
 
     },
@@ -71,6 +93,13 @@ export const store = new Vuex.Store({
         },
         readyState(state){
             return state.ready;
+        },
+
+        incomingMessages(state){
+            return state.incomingMessages;
+        },
+        outgoingMessages(state){
+            return state.outgoingMessages;
         }
     },
     actions: {
@@ -81,6 +110,21 @@ export const store = new Vuex.Store({
                     commit('fetchUserState', data);
                 });
 
+        },
+        
+        async fetchMessages ({commit}) {
+            let incomingEndpoint = `/api/messages/incoming`;
+            let outgoingEndpoint = `/api/messages/outgoing`;
+
+            await axios.get(incomingEndpoint)
+                .then(({data}) => {
+                    commit('addIncomingMessages', data);
+                });
+
+            await axios.get(outgoingEndpoint)
+                .then(({data}) => {
+                    commit('addOutgoingMessages', data);
+                });
         },
     }
 });

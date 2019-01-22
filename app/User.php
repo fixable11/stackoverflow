@@ -62,7 +62,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function sent()
+    public function sentMessages()
     {
         return $this->hasMany(Message::class, 'sender_id');
     }
@@ -72,7 +72,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function received()
+    public function receivedMessages()
     {
         return $this->hasMany(Message::class, 'receiver_id');
     }

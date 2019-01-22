@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
 
 class Message extends Model
 {
@@ -96,13 +97,51 @@ class Message extends Model
      * @param User $user
      * @return void
      */
-    protected function setStatusToTrash(User $user)
+    public function setStatusToTrash(User $user)
     {
         $mailbox = $this->fetchUserMailbox($user);
         
         $mailbox->update([
             'mailbox_type' => 'Trash'
         ]);
+    }
+
+    /**
+     * Filters messages by incoming type
+     *
+     * @param Collection $messages
+     * @return void
+     */
+    public static function filterByIncomingType(Collection $messages)
+    {
+        return $messages->map(function ($item, $key) {
+            return $item
+                ->mailbox()
+                ->where([
+                    'user_id' => Auth::id(),
+                    'mailbox_type' => 'In',
+                ])
+                ->first();
+        })->filter();
+    }
+
+    /**
+     * Filters messages by outgoing type
+     *
+     * @param Collection $messages
+     * @return void
+     */
+    public static function filterByOutgoingType(Collection $messages)
+    {
+        return $messages->map(function ($item, $key) {
+            return $item
+                ->mailbox()
+                ->where([
+                    'user_id' => Auth::id(),
+                    'mailbox_type' => 'Out',
+                ])
+                ->first();
+        })->filter();
     }
 
 }

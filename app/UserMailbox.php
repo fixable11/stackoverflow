@@ -21,4 +21,8 @@ class UserMailbox extends Model
      */
     protected $fillable = ['user_id', 'mailbox_type'];
 
+    public function message()
+    {
+        return $this->belongsTo(Message::class);
+    }
 }

@@ -55,4 +55,10 @@ Route::prefix('api')->group(function () {
     Route::get('users', 'UserProfileController@fetchAll');
     Route::get('users/{nickname}/meta', 'UserProfileController@fetchUser');
     Route::put('users/{nickname}/meta', 'UserProfileController@update');
+
+    Route::get('messages/outgoing', 'UserProfileController@outgoingMessages');
+    Route::get('messages/incoming', 'UserProfileController@incomingMessages');
+
+    Route::delete('messages/incoming/{message}', 'UserProfileController@destroyIncomingMessage');
+    Route::delete('messages/outgoing/{message}', 'UserProfileController@destroyOutgoingMessage');
 });

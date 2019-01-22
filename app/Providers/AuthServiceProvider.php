@@ -10,6 +10,10 @@ use App\Answer;
 use App\Policies\AnswerPolicy;
 use App\UserMeta;
 use App\Policies\UserMetaPolicy;
+use App\User;
+use App\Policies\UserPolicy;
+use App\Policies\MessagePolicy;
+use App\Message;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
         Question::class => QuestionPolicy::class,
         Answer::class => AnswerPolicy::class,
         UserMeta::class => UserMetaPolicy::class,
+        User::class => UserPolicy::class,
+        Message::class => MessagePolicy::class,
     ];
 
     /**

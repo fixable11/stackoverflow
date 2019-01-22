@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UserMeta;
 use App\Http\Requests\UpdateUserMetaRequest;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Message;
 
 class UserProfileController extends Controller
 {
@@ -136,6 +139,74 @@ class UserProfileController extends Controller
 
         return response()->json([
             'users' => $users
+        ], 200);
+    }
+
+    /**
+     * Outgoing messages filtered by user
+     *
+     * @param User $user
+     * @return void
+     */
+    public function outgoingMessages(User $user)
+    {
+        $sentMessages = Auth::user()->sentMessages;
+        
+        $filteredMessages = Message::filterByOutgoingType($sentMessages);
+
+        $outgoingMessages = $filteredMessages->map->message->each->load('receiver');
+
+        return response()->json($outgoingMessages, 200);
+    }
+
+    /**
+     * Incoming messages filtered by user
+     *
+     * @param User $user
+     * @return void
+     */
+    public function incomingMessages(User $user)
+    {
+        $receivedMessages = Auth::user()->receivedMessages;
+        
+        $filteredMessages = Message::filterByIncomingType($receivedMessages);
+
+        $incomingMessages = $filteredMessages->map->message->each->load('sender');
+
+        return response()->json($incomingMessages, 200);
+    }
+
+    /**
+     * Carries incoming message to trash
+     *
+     * @param Message $message
+     * @return void
+     */
+    public function destroyIncomingMessage(Message $message)
+    {
+        $this->authorize('destroyIncoming', $message);
+
+        $message->setStatusToTrash(Auth::user());
+
+        return response()->json([
+            'message' => 'Message sent to trash!',
+        ], 200);
+    }
+
+    /**
+     * Carries outgoing message to trash
+     *
+     * @param Message $message
+     * @return void
+     */
+    public function destroyOutgoingMessage(Message $message)
+    {
+        $this->authorize('destroyOutgoing', $message);
+
+        $message->setStatusToTrash(Auth::user());
+
+        return response()->json([
+            'message' => 'Message sent to trash!',
         ], 200);
     }
 
